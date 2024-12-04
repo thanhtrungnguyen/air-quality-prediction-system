@@ -6,3 +6,7 @@
 	path = references/frontend
 	url = https://github.com/angelguzmaning/ts-redux-react-realworld-example-app
 	branch = master
+[submodule "references/omdena-mumbai-chapter-air-quality"]
+	path = references/omdena-mumbai-chapter-air-quality
+	url = https://github.com/OmdenaAI/omdena-mumbai-chapter-air-quality
+	branch = main
