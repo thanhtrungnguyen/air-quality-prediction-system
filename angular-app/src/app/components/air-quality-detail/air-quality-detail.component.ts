@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
-import { AirQuality } from '../../model/defind.model';
+  import { Component } from '@angular/core';
+  import { AirQuality, Recommendation } from '../../model/defind.model';
 
+import { NgClass, NgFor, NgStyle } from '@angular/common';
 @Component({
   selector: 'app-air-quality-detail',
   templateUrl: './air-quality-detail.component.html',
-  styleUrl: './air-quality-detail.component.css'
+  styleUrl: './air-quality-detail.component.css',
 })
 export class AirQualityDetailComponent {
+  data = {
+    aqi: 340,
+    pollutants: [
+      {
+        name: 'PM2.5',
+        value: 80,
+      },
+      {
+        name: 'PM10',
+        value: 22.6,
+      },
+      {
+        name: 'O3',
+        value: 16,
+      },
+      {
+        name: 'NO2',
+        value: 42,
+      },
+      {
+        name: 'CO',
+        value: 900,
+      },
+    ],
+  }
+
   maxValues = {
     'PM2.5': 100,
     PM10: 100,
@@ -15,58 +42,44 @@ export class AirQualityDetailComponent {
     CO: 2000,
   };
 
-  aqi = 230;
   airQuality: AirQuality = {
-    aqi: this.aqi,
-    icon: this.getAQIDetails(this.aqi).icon,
-    status: this.getAQIDetails(this.aqi).advice,
-    color: this.getAQIDetails(this.aqi).color,
+    aqi: this.data.aqi,
+    icon: this.getAQIDetails(this.data.aqi).icon,
+    status: this.getAQIDetails(this.data.aqi).advice,
+    color: this.getAQIDetails(this.data.aqi).color,
     pollutants: [
       {
         name: 'PM2.5',
-        value: 80,
+        value: this.data.pollutants[0].value,
         unit: 'µg/m³',
-        percentage: (80 / this.maxValues['PM2.5']) * 100,
+        percentage: (this.data.pollutants[0].value / this.maxValues['PM2.5']) * 100,
       },
       {
         name: 'PM10',
-        value: 22.6,
+        value: this.data.pollutants[1].value,
         unit: 'µg/m³',
-        percentage: (22.6 / this.maxValues['PM10']) * 100,
+        percentage: (this.data.pollutants[1].value / this.maxValues['PM10']) * 100,
       },
       {
         name: 'O3',
-        value: 16,
+        value: this.data.pollutants[2].value,
         unit: 'µg/m³',
-        percentage: (16 / this.maxValues['O3']) * 100,
+        percentage: (this.data.pollutants[2].value / this.maxValues['O3']) * 100,
       },
       {
         name: 'NO2',
-        value: 42,
+        value: this.data.pollutants[3].value,
         unit: 'µg/m³',
-        percentage: (42 / this.maxValues['NO2']) * 100,
+        percentage: (this.data.pollutants[3].value / this.maxValues['NO2']) * 100,
       },
       {
         name: 'CO',
-        value: 1112.9,
+        value: this.data.pollutants[4].value,
         unit: 'µg/m³',
-        percentage: (1112.9 / this.maxValues['CO']) * 100,
+        percentage: (this.data.pollutants[4].value / this.maxValues['CO']) * 100,
       },
     ],
-    recommendations: [
-      { icon: '🏃‍♂️', text: 'Tránh tập thể dục ngoài trời' },
-      { icon: '😷', text: 'Đeo mặt nạ khi ra ngoài', link: 'MUA MẶT NẠ' },
-      {
-        icon: '🚪',
-        text: 'Đóng cửa sổ để tránh không khí bẩn bên ngoài',
-        link: 'MUA MỘT TRÌNH THEO DÕI',
-      },
-      {
-        icon: '💨',
-        text: 'Chạy máy lọc không khí',
-        link: 'MUA MÁY LỌC KHÔNG KHÍ',
-      },
-    ],
+    recommendations: this.getRecommendations(this.data.aqi) as Recommendation[],
   };
 
   getAQIDetails(aqi: number): {
@@ -124,6 +137,60 @@ export class AirQualityDetailComponent {
         color: 'maroon',
         icon: 'https://www.iqair.com/dl/web/aqi/ic_face_48_maroon.svg',
       };
+    }
+  }
+
+  getRecommendations(aqi: number): {icon?: string; text: string; link?: string }[] {
+    var defaultIcon = '😀';
+
+    if (aqi <= 50) {
+      defaultIcon = '😀';
+      return [
+        { text: 'Không cần thay đổi hoạt động thường ngày.', icon: defaultIcon },
+        { text: 'Tận hưởng không khí trong lành.', icon: defaultIcon },
+        { text: 'Đi dạo ngoài trời.', icon: defaultIcon },
+        { text: 'Mở cửa sổ để thông gió.', icon: defaultIcon }
+      ];
+    } else if (aqi <= 100) {
+      defaultIcon = '🙂';
+      return [
+        { text: 'Một số người nhạy cảm có thể gặp vấn đề nhẹ.', icon: defaultIcon },
+        { text: 'Tiếp tục các hoạt động ngoài trời.', icon: defaultIcon },
+        { text: 'Theo dõi chất lượng không khí.', icon: defaultIcon },
+        { text: 'Giữ cửa sổ mở nếu không khí trong lành.', icon: defaultIcon }
+      ];
+    } else if (aqi <= 150) {
+      defaultIcon = '😕';
+      return [
+        { text: 'Hạn chế hoạt động ngoài trời cho nhóm nhạy cảm.', icon: defaultIcon },
+        { text: 'Đeo mặt nạ khi ra ngoài.', icon: 'MUA MẶT NẠ' },
+        { text: 'Tránh các hoạt động thể chất mạnh.', icon: defaultIcon },
+        { text: 'Theo dõi sức khỏe nếu cảm thấy không khỏe.', icon: defaultIcon }
+      ];
+    } else if (aqi <= 200) {
+      defaultIcon = '😏';
+      return [
+        { text: 'Hạn chế ra ngoài và giảm hoạt động mạnh.', icon: defaultIcon },
+        { text: 'Đóng cửa sổ để tránh không khí bẩn bên ngoài.', icon: defaultIcon },
+        { text: 'Chạy máy lọc không khí.', icon: defaultIcon },
+        { text: 'Tránh các khu vực có nhiều khói bụi.', icon: defaultIcon }
+      ];
+    } else if (aqi <= 300) {
+      defaultIcon = '😞';
+      return [
+        { text: 'Tránh ra ngoài nếu có thể.', icon: defaultIcon },
+        { text: 'Sử dụng máy lọc không khí trong nhà.', icon: defaultIcon },
+        { text: 'Đóng kín cửa sổ và cửa ra vào.', icon: defaultIcon },
+        { text: 'Theo dõi sức khỏe và tìm kiếm sự giúp đỡ nếu cần.', icon: defaultIcon }
+      ];
+    } else {
+      defaultIcon = '🫠';
+      return [
+        { text: 'Ở trong nhà và đóng kín cửa.', icon: defaultIcon },
+        { text: 'Tránh mọi hoạt động ngoài trời.', icon: defaultIcon },
+        { text: 'Sử dụng máy lọc không khí.', icon: defaultIcon },
+        { text: 'Liên hệ với cơ quan y tế nếu có triệu chứng.', icon: defaultIcon }
+      ];
     }
   }
 }
