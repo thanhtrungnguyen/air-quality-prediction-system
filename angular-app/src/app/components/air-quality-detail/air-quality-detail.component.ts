@@ -1,7 +1,6 @@
-  import { Component } from '@angular/core';
-  import { AirQuality, Recommendation } from '../../model/defind.model';
+import { Component } from '@angular/core';
+import { AirQuality, Recommendation } from '../../model/defind.model';
 
-import { NgClass, NgFor, NgStyle } from '@angular/common';
 @Component({
   selector: 'app-air-quality-detail',
   templateUrl: './air-quality-detail.component.html',
@@ -9,7 +8,7 @@ import { NgClass, NgFor, NgStyle } from '@angular/common';
 })
 export class AirQualityDetailComponent {
   data = {
-    aqi: 340,
+    aqi: 256,
     pollutants: [
       {
         name: 'PM2.5',
@@ -32,7 +31,7 @@ export class AirQualityDetailComponent {
         value: 900,
       },
     ],
-  }
+  };
 
   maxValues = {
     'PM2.5': 100,
@@ -52,31 +51,36 @@ export class AirQualityDetailComponent {
         name: 'PM2.5',
         value: this.data.pollutants[0].value,
         unit: 'µg/m³',
-        percentage: (this.data.pollutants[0].value / this.maxValues['PM2.5']) * 100,
+        percentage:
+          (this.data.pollutants[0].value / this.maxValues['PM2.5']) * 100,
       },
       {
         name: 'PM10',
         value: this.data.pollutants[1].value,
         unit: 'µg/m³',
-        percentage: (this.data.pollutants[1].value / this.maxValues['PM10']) * 100,
+        percentage:
+          (this.data.pollutants[1].value / this.maxValues['PM10']) * 100,
       },
       {
         name: 'O3',
         value: this.data.pollutants[2].value,
         unit: 'µg/m³',
-        percentage: (this.data.pollutants[2].value / this.maxValues['O3']) * 100,
+        percentage:
+          (this.data.pollutants[2].value / this.maxValues['O3']) * 100,
       },
       {
         name: 'NO2',
         value: this.data.pollutants[3].value,
         unit: 'µg/m³',
-        percentage: (this.data.pollutants[3].value / this.maxValues['NO2']) * 100,
+        percentage:
+          (this.data.pollutants[3].value / this.maxValues['NO2']) * 100,
       },
       {
         name: 'CO',
         value: this.data.pollutants[4].value,
         unit: 'µg/m³',
-        percentage: (this.data.pollutants[4].value / this.maxValues['CO']) * 100,
+        percentage:
+          (this.data.pollutants[4].value / this.maxValues['CO']) * 100,
       },
     ],
     recommendations: this.getRecommendations(this.data.aqi) as Recommendation[],
@@ -140,40 +144,57 @@ export class AirQualityDetailComponent {
     }
   }
 
-  getRecommendations(aqi: number): {icon?: string; text: string; link?: string }[] {
+  getRecommendations(
+    aqi: number
+  ): { icon?: string; text: string; link?: string }[] {
     var defaultIcon = '😀';
 
     if (aqi <= 50) {
       defaultIcon = '😀';
       return [
-        { text: 'Không cần thay đổi hoạt động thường ngày.', icon: defaultIcon },
+        {
+          text: 'Không cần thay đổi hoạt động thường ngày.',
+          icon: defaultIcon,
+        },
         { text: 'Tận hưởng không khí trong lành.', icon: defaultIcon },
         { text: 'Đi dạo ngoài trời.', icon: defaultIcon },
-        { text: 'Mở cửa sổ để thông gió.', icon: defaultIcon }
+        { text: 'Mở cửa sổ để thông gió.', icon: defaultIcon },
       ];
     } else if (aqi <= 100) {
       defaultIcon = '🙂';
       return [
-        { text: 'Một số người nhạy cảm có thể gặp vấn đề nhẹ.', icon: defaultIcon },
+        {
+          text: 'Một số người nhạy cảm có thể gặp vấn đề nhẹ.',
+          icon: defaultIcon,
+        },
         { text: 'Tiếp tục các hoạt động ngoài trời.', icon: defaultIcon },
         { text: 'Theo dõi chất lượng không khí.', icon: defaultIcon },
-        { text: 'Giữ cửa sổ mở nếu không khí trong lành.', icon: defaultIcon }
+        { text: 'Giữ cửa sổ mở nếu không khí trong lành.', icon: defaultIcon },
       ];
     } else if (aqi <= 150) {
       defaultIcon = '😕';
       return [
-        { text: 'Hạn chế hoạt động ngoài trời cho nhóm nhạy cảm.', icon: defaultIcon },
-        { text: 'Đeo mặt nạ khi ra ngoài.', icon: 'MUA MẶT NẠ' },
+        {
+          text: 'Hạn chế hoạt động ngoài trời cho nhóm nhạy cảm.',
+          icon: defaultIcon,
+        },
+        { text: 'Đeo mặt nạ khi ra ngoài.', icon: defaultIcon },
         { text: 'Tránh các hoạt động thể chất mạnh.', icon: defaultIcon },
-        { text: 'Theo dõi sức khỏe nếu cảm thấy không khỏe.', icon: defaultIcon }
+        {
+          text: 'Theo dõi sức khỏe nếu cảm thấy không khỏe.',
+          icon: defaultIcon,
+        },
       ];
     } else if (aqi <= 200) {
       defaultIcon = '😏';
       return [
         { text: 'Hạn chế ra ngoài và giảm hoạt động mạnh.', icon: defaultIcon },
-        { text: 'Đóng cửa sổ để tránh không khí bẩn bên ngoài.', icon: defaultIcon },
+        {
+          text: 'Đóng cửa sổ để tránh không khí bẩn bên ngoài.',
+          icon: defaultIcon,
+        },
         { text: 'Chạy máy lọc không khí.', icon: defaultIcon },
-        { text: 'Tránh các khu vực có nhiều khói bụi.', icon: defaultIcon }
+        { text: 'Tránh các khu vực có nhiều khói bụi.', icon: defaultIcon },
       ];
     } else if (aqi <= 300) {
       defaultIcon = '😞';
@@ -181,7 +202,10 @@ export class AirQualityDetailComponent {
         { text: 'Tránh ra ngoài nếu có thể.', icon: defaultIcon },
         { text: 'Sử dụng máy lọc không khí trong nhà.', icon: defaultIcon },
         { text: 'Đóng kín cửa sổ và cửa ra vào.', icon: defaultIcon },
-        { text: 'Theo dõi sức khỏe và tìm kiếm sự giúp đỡ nếu cần.', icon: defaultIcon }
+        {
+          text: 'Theo dõi sức khỏe và tìm kiếm sự giúp đỡ nếu cần.',
+          icon: defaultIcon,
+        },
       ];
     } else {
       defaultIcon = '🫠';
@@ -189,7 +213,10 @@ export class AirQualityDetailComponent {
         { text: 'Ở trong nhà và đóng kín cửa.', icon: defaultIcon },
         { text: 'Tránh mọi hoạt động ngoài trời.', icon: defaultIcon },
         { text: 'Sử dụng máy lọc không khí.', icon: defaultIcon },
-        { text: 'Liên hệ với cơ quan y tế nếu có triệu chứng.', icon: defaultIcon }
+        {
+          text: 'Liên hệ với cơ quan y tế nếu có triệu chứng.',
+          icon: defaultIcon,
+        },
       ];
     }
   }
