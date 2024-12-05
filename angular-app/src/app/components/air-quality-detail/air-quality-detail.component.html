@@ -9,11 +9,7 @@
       <h2>{{ airQuality.status }}</h2>
     </div>
     <div class="icon">
-      <img
-        width="148"
-        [src]="airQuality.icon"
-        alt="icon"
-      />
+      <img width="148" [src]="airQuality.icon" alt="icon" />
     </div>
   </div>
 
@@ -45,7 +41,8 @@
     <div *ngFor="let pollutant of airQuality.pollutants" class="pollutant-row">
       <div class="pollutant-name">{{ pollutant.name }}</div>
       <div class="progress-bar">
-        <div class="progress" [ngStyle]="{'width': pollutant.percentage + '%'}" [ngClass]="pollutant.name.toLowerCase()"></div>
+        <div class="progress" [ngStyle]="{'width': pollutant.percentage + '%'}"
+          [ngClass]="pollutant.name.toLowerCase()"></div>
       </div>
       <div class="pollutant-value">{{ pollutant.value }} {{ pollutant.unit }}</div>
     </div>
@@ -69,7 +66,8 @@
 
   <div class="additional-info">
     <h3>Thông tin thêm về chất lượng không khí</h3>
-    <p>Chất lượng không khí có thể ảnh hưởng đến sức khỏe của bạn. Hãy đảm bảo bạn luôn cập nhật thông tin và thực hiện các biện pháp bảo vệ cần thiết.</p>
+    <p>Chất lượng không khí có thể ảnh hưởng đến sức khỏe của bạn. Hãy đảm bảo bạn luôn cập nhật
+      thông tin và thực hiện các biện pháp bảo vệ cần thiết.</p>
     <button class="load-more-btn">Tìm hiểu thêm</button>
   </div>
 

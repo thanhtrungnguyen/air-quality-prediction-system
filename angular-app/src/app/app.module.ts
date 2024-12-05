@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
-
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AirQualityDetailComponent } from './components/air-quality-detail/air-quality-detail.component';
+import { AirQualityForecastComponent } from './components/air-quality-forecast/air-quality-forecast.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
+  declarations: [
+    AppComponent,
+    AirQualityDetailComponent,
+    AirQualityForecastComponent
   ],
-  providers: [provideHttpClient()]
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
