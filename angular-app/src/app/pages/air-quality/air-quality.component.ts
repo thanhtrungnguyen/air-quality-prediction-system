@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { AirQuality, Recommendation } from '../../models/defind.model';
 import { NgClass, NgFor, NgStyle } from '@angular/common';
+import { AirQuality, Recommendation } from '../../models/defind.model';
 @Component({
   selector: 'app-air-quality',
   standalone: true,
