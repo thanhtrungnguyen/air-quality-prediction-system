@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AirQuality } from '../models/air-quality.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AirQualityService {
-  getAirQuality(): Observable<AirQuality> {
-    const mockData: AirQuality = {
+  getAirQuality(): Observable<any> {
+    const mockData = {
       index: 154,
       level: 'Unhealthy',
       mainPollutant: 'PM2.5',
