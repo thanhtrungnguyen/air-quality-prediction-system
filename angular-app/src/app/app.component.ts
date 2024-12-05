@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { AirQualityDetailComponent } from './components/air-quality-detail/air-quality-detail.component';
+import { AirQualityForecastComponent } from './components/air-quality-forecast/air-quality-forecast.component';
 import { RouterOutlet } from '@angular/router';
-import { AirQualityComponent } from "./pages/air-quality/air-quality.component";
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, AirQualityComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  // standalone: true,
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Air Quality App';
+  title = 'Air quality predictions';
 }

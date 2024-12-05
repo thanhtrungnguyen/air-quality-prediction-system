@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+  import { Component } from '@angular/core';
+  import { AirQuality, Recommendation } from '../../model/defind.model';
 
 import { NgClass, NgFor, NgStyle } from '@angular/common';
-import { AirQuality, Recommendation } from '../../models/defind.model';
 @Component({
-  selector: 'app-air-quality',
-  standalone: true,
-  imports: [NgFor, NgClass, NgStyle],
-  templateUrl: './air-quality.component.html',
-  styleUrl: './air-quality.component.css',
+  selector: 'app-air-quality-detail',
+  templateUrl: './air-quality-detail.component.html',
+  styleUrl: './air-quality-detail.component.css',
 })
-export class AirQualityComponent {
+export class AirQualityDetailComponent {
   data = {
     aqi: 340,
     pollutants: [
