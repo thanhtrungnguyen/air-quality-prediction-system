@@ -1,16 +1,26 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { AirQuality } from '../models/air-quality.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AirQualityService {
-  private dataUrl = 'assets/air-quality.json';
+  getAirQuality(): Observable<AirQuality> {
+    const mockData: AirQuality = {
+      index: 154,
+      level: 'Unhealthy',
+      mainPollutant: 'PM2.5',
+      pollutants: [
+        { name: 'PM2.5', concentration: 60, status: 'unhealthy' },
+        { name: 'PM10', concentration: 72.6, status: 'moderate' },
+        { name: 'O3', concentration: 16, status: 'good' },
+        { name: 'NO2', concentration: 42, status: 'good' },
+        { name: 'CO', concentration: 1112.9, status: 'good' },
+      ],
+      pm25Multiplier: 12,
+    };
 
-  constructor(private http: HttpClient) { }
-
-  getAirQualityData(): Observable<any[]> {
-    return this.http.get<any[]>(this.dataUrl);
+    return of(mockData);
   }
 }
