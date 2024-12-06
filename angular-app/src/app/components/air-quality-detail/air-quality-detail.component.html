@@ -1,0 +1,54 @@
+<div class="air-quality">
+  <div class="air-quality-card" [ngStyle]="{'background-color': airQuality.color}">
+    <div class="aqi-value" [ngStyle]="{'background-color': airQuality.color}">
+      <p>AQI</p>
+      <p>{{ airQuality.aqi }}</p>
+    </div>
+    <div class="description">
+      <p>CHỈ SỐ AQI TRỰC TIẾP</p>
+      <h2>{{ airQuality.status }}</h2>
+    </div>
+    <div class="icon">
+      <img width="148" [src]="airQuality.icon" alt="icon" />
+    </div>
+  </div>
+
+  <div class="overview">
+    <h2>TỔNG QUAN</h2>
+    <p>Chất lượng không khí hiện tại ở Hà Nội ra sao?</p>
+    <p><strong>Lời khuyên:</strong> {{ getAQIDetails(airQuality.aqi).advice }}</p>
+    <p><strong>Tác động sức khỏe:</strong> {{ getAQIDetails(airQuality.aqi).healthEffects }}</p>
+    <p><strong>Hành động khuyến nghị:</strong> {{ getAQIDetails(airQuality.aqi).actions }}</p>
+  </div>
+
+  <div class="pollutant-table">
+    <div *ngFor="let pollutant of airQuality.pollutants" class="pollutant-row">
+      <div class="pollutant-name">{{ pollutant.name }}</div>
+      <div class="progress-bar">
+        <div class="progress" [ngStyle]="{'width': pollutant.percentage + '%'}"
+          [ngClass]="pollutant.name.toLowerCase()"></div>
+      </div>
+      <div class="pollutant-value">{{ pollutant.value }} {{ pollutant.unit }}</div>
+    </div>
+  </div>
+
+  <div class="recommendation-container">
+    <h2 class="recommendation-header">KHUYẾN NGHỊ VỀ SỨC KHỎE</h2>
+    <p>Chất lượng không khí hiện tại ở Hà Nội ra sao?</p>
+    <div class="recommendation-list">
+      <div *ngFor="let recommendation of airQuality.recommendations" class="recommendation-item">
+        <div class="recommendation-icon">{{ recommendation.icon }}</div>
+        <div class="recommendation-text">
+          {{ recommendation.text }}<br />
+          <a href="{{ recommendation.link }}">{{ recommendation.link }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="additional-info">
+    <h3>Thông tin thêm về chất lượng không khí</h3>
+    <p>Chất lượng không khí có thể ảnh hưởng đến sức khỏe của bạn. Hãy đảm bảo bạn luôn cập nhật thông tin và thực hiện các biện pháp bảo vệ cần thiết.</p>
+    <button class="load-more-btn">Dự đoán chất lượng không khí</button>
+  </div>
+</div>

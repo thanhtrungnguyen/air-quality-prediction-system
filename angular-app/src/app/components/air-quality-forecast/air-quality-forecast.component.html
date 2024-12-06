@@ -1,0 +1,20 @@
+<div class="forecast">
+  <h2>Dự báo chất lượng không khí (AQI) tại Hà Nội</h2>
+  <table class="forecast-table">
+    <thead>
+      <tr>
+        <th>Ngày</th>
+        <th>Mức ô nhiễm</th>
+        <th>Chỉ số AQI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let day of forecast" [class.selected]="day === selectedDetail"
+        (click)="selectDetail(day)">
+        <td>{{ day.date | date: "dd/MM/yyyy"}}</td>
+        <td>{{ mapStatus(day.AQI) }}</td>
+        <td>{{ day.AQI }} AQI</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
