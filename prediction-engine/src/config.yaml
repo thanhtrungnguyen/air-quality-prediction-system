@@ -1,0 +1,13 @@
+paths:
+  model: "model/best_model.keras"
+  dataset: "data/dataset.csv"
+  logs: "logs/training.log"
+
+training:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.001
+
+api:
+  host: "0.0.0.0"
+  port: 5000
