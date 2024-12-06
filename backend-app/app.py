@@ -6,8 +6,8 @@ from datetime import datetime
 
 DB_CONFIG = {
     "dbname": "weather_service",
-    "user": "your_db_user",  # Replace with your PostgreSQL username
-    "password": "your_db_password",  # Replace with your PostgreSQL password
+    "user": "postgres",  # Replace with your PostgreSQL username
+    "password": "123456",  # Replace with your PostgreSQL password
     "host": "localhost",
     "port": "5432"
 }
